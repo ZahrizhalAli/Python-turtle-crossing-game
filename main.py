@@ -1,6 +1,7 @@
 from turtle import Screen
 from player import Player
 from car_manager import Car
+from scoreboard import Scoreboard
 import time
 screen = Screen()
 screen.setup(600, 600)
@@ -9,6 +10,7 @@ screen.listen()
 
 player = Player()
 car = Car()
+score = Scoreboard()
 
 is_game_on = True
 
@@ -22,9 +24,11 @@ while is_game_on:
     for c in car.car_list:
         if player.distance(c) < 20:
             is_game_on = False
+            score.game_over()
 
     if player.ycor() == 280:
         player.start_again()
         car.increase_level()
+        score.increase_score()
 
 screen.exitonclick()
